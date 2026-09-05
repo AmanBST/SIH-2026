@@ -5,53 +5,41 @@
 function showPage(pageId) {
 
     // Hide all pages
-
     const pages = document.querySelectorAll(".page");
 
     pages.forEach(page => {
-
         page.classList.remove("active-page");
-
     });
 
 
     // Show selected page
-
-    const selectedPage =
-        document.getElementById(pageId);
+    const selectedPage = document.getElementById(pageId);
 
     if (selectedPage) {
-
         selectedPage.classList.add("active-page");
-
     }
+
+
+    // Load profile when profile page opens
     if (pageId === "profile") {
+        loadProfile();
+    }
 
-    loadProfile();
-
-}
 
     // Remove active from all navigation items
-
-    const navItems =
-        document.querySelectorAll(".nav-item");
+    const navItems = document.querySelectorAll(".nav-item");
 
     navItems.forEach(item => {
-
         item.classList.remove("active");
-
     });
 
 
-    // Activate only the selected navigation item
-
+    // Activate only selected navigation item
     const selectedNav =
         document.getElementById("nav-" + pageId);
 
     if (selectedNav) {
-
         selectedNav.classList.add("active");
-
     }
 
 }
@@ -66,33 +54,23 @@ function previewImage(event) {
     const file = event.target.files[0];
 
     if (!file) {
-
         return;
-
     }
 
 
     // Check file size
-
     const maxSize = 10 * 1024 * 1024;
 
     if (file.size > maxSize) {
-
         alert("File size must be less than 10 MB.");
-
         return;
-
     }
 
 
     // Check image
-
     if (!file.type.startsWith("image/")) {
-
         alert("Please select an image file.");
-
         return;
-
     }
 
 
@@ -101,7 +79,8 @@ function previewImage(event) {
 
     reader.onload = function(e) {
 
-        const preview = document.getElementById("preview");
+        const preview =
+            document.getElementById("preview");
 
         const previewContainer =
             document.getElementById("preview-container");
@@ -120,7 +99,6 @@ function previewImage(event) {
 
 
         // Save image for other pages
-
         localStorage.setItem(
             "productImage",
             e.target.result
@@ -146,25 +124,24 @@ function startAnalysis() {
 
     if (!image) {
 
-        alert("Please upload a product image first.");
+        alert(
+            "Please upload a product image first."
+        );
 
         return;
-
     }
 
 
     // Put image into analysis page
-
-    document.getElementById("analysisImage").src = image;
+    document.getElementById("analysisImage").src =
+        image;
 
 
     // Move to analysis page
-
     showPage("analysis");
 
 
     // Start animation
-
     runAnalysis();
 
 }
@@ -190,7 +167,6 @@ function runAnalysis() {
 
 
     // Step 1
-
     step1.innerHTML =
         '<i class="fa-solid fa-circle-check"></i>';
 
@@ -214,7 +190,6 @@ function runAnalysis() {
 
 
                 // After analysis
-
                 setTimeout(function() {
 
                     loadResultImage();
@@ -256,17 +231,6 @@ function loadResultImage() {
 
 
 /* ============================================
-   INITIAL PAGE
-============================================ */
-
-document.addEventListener("DOMContentLoaded", function() {
-
-    // Start with login page
-
-    showLogin();
-
-});
-/* ============================================
    LEGAL RULE SEARCH
 ============================================ */
 
@@ -281,10 +245,12 @@ function searchRules() {
     const ruleCards =
         document.querySelectorAll(".rule-item");
 
+
     ruleCards.forEach(card => {
 
         const text =
             card.innerText.toLowerCase();
+
 
         if (text.includes(searchText)) {
 
@@ -300,12 +266,18 @@ function searchRules() {
 
 }
 
+
 /* ============================================
-   LOGIN & SIGNUP
+   LOGIN & SIGNUP - BACKEND CONNECTED
 ============================================ */
 
+const API_URL =
+    "http://127.0.0.1:8000";
 
-/* SHOW LOGIN */
+
+/* ============================================
+   SHOW LOGIN
+============================================ */
 
 function showLogin() {
 
@@ -318,7 +290,9 @@ function showLogin() {
 }
 
 
-/* SHOW SIGNUP */
+/* ============================================
+   SHOW SIGNUP
+============================================ */
 
 function showSignup() {
 
@@ -331,9 +305,11 @@ function showSignup() {
 }
 
 
-/* SIGNUP */
+/* ============================================
+   SIGNUP
+============================================ */
 
-function signupUser(event) {
+async function signupUser(event) {
 
     event.preventDefault();
 
@@ -348,63 +324,135 @@ function signupUser(event) {
         document.getElementById("signupPassword").value;
 
     const confirmPassword =
-        document.getElementById("signupConfirmPassword").value;
+        document.getElementById(
+            "signupConfirmPassword"
+        ).value;
 
 
-    // Check passwords
+    /* PASSWORD MATCH */
 
     if (password !== confirmPassword) {
 
         alert("Passwords do not match.");
 
         return;
-
     }
 
 
-    // Basic password validation
+    /* PASSWORD LENGTH */
 
     if (password.length < 6) {
 
-        alert("Password must contain at least 6 characters.");
+        alert(
+            "Password must contain at least 6 characters."
+        );
 
         return;
-
     }
 
 
-    // Save demo account
+    try {
 
-    const user = {
+        const response = await fetch(
+            `${API_URL}/api/signup`,
+            {
 
-        name: name,
+                method: "POST",
 
-        email: email,
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-        password: password
+                body: JSON.stringify({
 
-    };
+                    full_name: name,
 
+                    email: email,
 
-    localStorage.setItem(
-        "legalScanUser",
-        JSON.stringify(user)
-    );
+                    password: password
 
+                })
 
-    alert(
-        "Account created successfully! Please sign in."
-    );
+            }
+        );
 
 
-    showLogin();
+        const data = await response.json();
+
+
+        /* BACKEND ERROR */
+
+        if (!response.ok || !data.success) {
+
+            alert(
+                data.message ||
+                "Unable to create account."
+            );
+
+            return;
+        }
+
+
+        /*
+           SAVE ONLY USER INFORMATION.
+
+           Password is NOT saved here.
+        */
+
+        localStorage.setItem(
+            "legalScanUser",
+            JSON.stringify(data.user)
+        );
+
+
+        alert(
+            "Account created successfully! Please sign in."
+        );
+
+
+        /* CLEAR FORM */
+
+        document.getElementById("signupName").value =
+            "";
+
+        document.getElementById("signupEmail").value =
+            "";
+
+        document.getElementById("signupPassword").value =
+            "";
+
+        document.getElementById(
+            "signupConfirmPassword"
+        ).value = "";
+
+
+        /* OPEN LOGIN */
+
+        showLogin();
+
+
+    } catch (error) {
+
+        console.error(
+            "Signup error:",
+            error
+        );
+
+        alert(
+            "Cannot connect to LegalScan server. " +
+            "Please make sure the backend is running."
+        );
+
+    }
 
 }
 
 
-/* LOGIN */
+/* ============================================
+   LOGIN
+============================================ */
 
-function loginUser(event) {
+async function loginUser(event) {
 
     event.preventDefault();
 
@@ -416,59 +464,142 @@ function loginUser(event) {
         document.getElementById("loginPassword").value;
 
 
-    const savedUser =
-        localStorage.getItem("legalScanUser");
+    try {
 
+        const response = await fetch(
+            `${API_URL}/api/login`,
+            {
 
-    if (!savedUser) {
+                method: "POST",
 
-        alert(
-            "No account found. Please create an account first."
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    email: email,
+
+                    password: password
+
+                })
+
+            }
         );
 
-        return;
 
-    }
-
-
-    const user =
-        JSON.parse(savedUser);
+        const data = await response.json();
 
 
-    if (
-        email === user.email &&
-        password === user.password
-    ) {
+        /* LOGIN FAILED */
 
-        // Hide login
+        if (!response.ok || !data.success) {
+
+            alert(
+                data.message ||
+                "Incorrect email or password."
+            );
+
+            return;
+        }
+
+
+        /*
+           Save logged-in user's information.
+        */
+
+        localStorage.setItem(
+            "legalScanUser",
+            JSON.stringify(data.user)
+        );
+
+
+        /* HIDE LOGIN */
 
         document.getElementById("loginPage").style.display =
             "none";
 
 
-        // Update inspector name
+        /* UPDATE SIDEBAR */
 
-        const userNames =
-            document.querySelectorAll(".user-card strong");
-
-
-        userNames.forEach(element => {
-
-            element.textContent = user.name;
-
-        });
+        updateUserDisplay(data.user);
 
 
-        // Open dashboard
+        /* LOAD PROFILE */
+
+        loadProfile();
+
+
+        /* OPEN DASHBOARD */
 
         showPage("dashboard");
 
 
-    } else {
+        /* CLEAR LOGIN FORM */
+
+        document.getElementById("loginEmail").value =
+            "";
+
+        document.getElementById("loginPassword").value =
+            "";
+
+
+    } catch (error) {
+
+        console.error(
+            "Login error:",
+            error
+        );
 
         alert(
-            "Incorrect email or password."
+            "Cannot connect to LegalScan server. " +
+            "Please make sure the backend is running."
         );
+
+    }
+
+}
+
+
+/* ============================================
+   UPDATE USER DISPLAY
+============================================ */
+
+function updateUserDisplay(user) {
+
+    if (!user) {
+        return;
+    }
+
+
+    /* SIDEBAR NAME */
+
+    const userNames =
+        document.querySelectorAll(
+            ".user-card strong"
+        );
+
+
+    userNames.forEach(element => {
+
+        element.textContent =
+            user.full_name;
+
+    });
+
+
+    /* SIDEBAR AVATAR */
+
+    const userAvatar =
+        document.querySelector(".user-avatar");
+
+
+    if (userAvatar && user.full_name) {
+
+        userAvatar.textContent =
+            user.full_name
+                .charAt(0)
+                .toUpperCase();
 
     }
 
@@ -505,6 +636,7 @@ function togglePassword(inputId, icon) {
 
 }
 
+
 /* ============================================
    PROFILE
 ============================================ */
@@ -514,71 +646,102 @@ function loadProfile() {
     const savedUser =
         localStorage.getItem("legalScanUser");
 
+
     if (!savedUser) {
-
         return;
-
     }
+
 
     const user =
         JSON.parse(savedUser);
 
 
-    // Profile name
+    /*
+       IMPORTANT:
+
+       Backend returns:
+
+       user.full_name
+
+       NOT:
+
+       user.name
+    */
+
+
+    /* PROFILE NAME */
 
     const profileName =
         document.getElementById("profileName");
 
     const profileFullName =
-        document.getElementById("profileFullName");
+        document.getElementById(
+            "profileFullName"
+        );
 
 
     if (profileName) {
 
-        profileName.textContent = user.name;
+        profileName.textContent =
+            user.full_name;
 
     }
+
 
     if (profileFullName) {
 
-        profileFullName.textContent = user.name;
+        profileFullName.textContent =
+            user.full_name;
 
     }
 
 
-    // Email
+    /* EMAIL */
 
     const profileEmail =
         document.getElementById("profileEmail");
 
     const profileEmailDetail =
-        document.getElementById("profileEmailDetail");
+        document.getElementById(
+            "profileEmailDetail"
+        );
 
 
     if (profileEmail) {
 
-        profileEmail.textContent = user.email;
+        profileEmail.textContent =
+            user.email;
 
     }
+
 
     if (profileEmailDetail) {
 
-        profileEmailDetail.textContent = user.email;
+        profileEmailDetail.textContent =
+            user.email;
 
     }
 
 
-    // Avatar
+    /* AVATAR */
 
     const avatar =
         document.getElementById("profileAvatar");
 
-    if (avatar && user.name) {
+
+    if (avatar && user.full_name) {
 
         avatar.textContent =
-            user.name.charAt(0).toUpperCase();
+            user.full_name
+                .charAt(0)
+                .toUpperCase();
 
     }
+
+
+    /* UPDATE SIDEBAR */
+
+    updateUserDisplay(user);
 
 }
 
@@ -590,20 +753,31 @@ function loadProfile() {
 function logoutUser() {
 
     const confirmLogout =
-        confirm("Are you sure you want to logout?");
+        confirm(
+            "Are you sure you want to logout?"
+        );
+
 
     if (!confirmLogout) {
-
         return;
-
     }
 
 
-    // Hide profile/dashboard
+    /*
+       Remove logged-in user.
+    */
+
+    localStorage.removeItem(
+        "legalScanUser"
+    );
+
+
+    /* Open login */
 
     showLogin();
 
 }
+
 
 /* ============================================
    EDIT FULL NAME
@@ -614,10 +788,9 @@ function editFullName() {
     const savedUser =
         localStorage.getItem("legalScanUser");
 
+
     if (!savedUser) {
-
         return;
-
     }
 
 
@@ -628,16 +801,14 @@ function editFullName() {
     const newName =
         prompt(
             "Enter your new full name:",
-            user.name
+            user.full_name
         );
 
 
-    // Cancel pressed
+    /* Cancel pressed */
 
     if (newName === null) {
-
         return;
-
     }
 
 
@@ -645,23 +816,28 @@ function editFullName() {
         newName.trim();
 
 
-    // Empty name
+    /* Empty name */
 
     if (trimmedName === "") {
 
-        alert("Name cannot be empty.");
+        alert(
+            "Name cannot be empty."
+        );
 
         return;
-
     }
 
 
-    // Update name
+    /*
+       TEMPORARY FRONTEND UPDATE
 
-    user.name = trimmedName;
+       We will connect this to the
+       FastAPI database next.
+    */
 
+    user.full_name =
+        trimmedName;
 
-    // Save updated user
 
     localStorage.setItem(
         "legalScanUser",
@@ -669,11 +845,67 @@ function editFullName() {
     );
 
 
-    // Refresh profile
+    /* Refresh profile */
 
     loadProfile();
 
 
-    alert("Full name updated successfully.");
+    alert(
+        "Full name updated successfully."
+    );
 
 }
+
+
+/* ============================================
+   INITIAL PAGE
+============================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        /*
+           If a user is already logged in,
+           show dashboard.
+
+           Otherwise show login.
+        */
+
+        const savedUser =
+            localStorage.getItem(
+                "legalScanUser"
+            );
+
+
+        if (savedUser) {
+
+            try {
+
+                const user =
+                    JSON.parse(savedUser);
+
+                updateUserDisplay(user);
+
+                loadProfile();
+
+                showPage("dashboard");
+
+            } catch (error) {
+
+                localStorage.removeItem(
+                    "legalScanUser"
+                );
+
+                showLogin();
+
+            }
+
+        } else {
+
+            showLogin();
+
+        }
+
+    }
+);
