@@ -1,0 +1,2262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LegalScan AI | Compliance Checker</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ============================================
+     LOGIN PAGE
+============================================ -->
+
+<div id="loginPage" class="auth-page">
+
+    <div class="auth-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="auth-brand">
+
+            <div class="auth-logo">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <h1>LegalScan</h1>
+
+            <span>AI Compliance</span>
+
+            <p>
+                AI-powered packaged commodity
+                inspection and legal compliance.
+            </p>
+
+            <div class="auth-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>AI-powered inspection</span>
+
+            </div>
+
+            <div class="auth-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>Legal Metrology rule engine</span>
+
+            </div>
+
+            <div class="auth-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>Explainable compliance reports</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOGIN FORM -->
+
+        <div class="auth-form-container">
+
+            <div class="auth-form">
+
+                <h2>Welcome back</h2>
+
+                <p class="auth-subtitle">
+                    Sign in to your LegalScan account
+                </p>
+
+
+                <form onsubmit="loginUser(event)">
+
+                    <label>Email Address</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <label>Password</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <i
+                            class="fa-solid fa-eye password-eye"
+                            onclick="togglePassword('loginPassword', this)"
+                        ></i>
+
+                    </div>
+
+
+                    <div class="auth-options">
+
+                        <label class="remember-me">
+
+                            <input type="checkbox">
+
+                            Remember me
+
+                        </label>
+
+                        <a href="#">
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="auth-button"
+                    >
+
+                        Sign In
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </form>
+
+
+                <div class="auth-divider">
+
+                    <span>OR</span>
+
+                </div>
+
+
+                <p class="signup-text">
+
+                    Don't have an account?
+
+                    <button
+                        class="link-button"
+                        onclick="showSignup()"
+                    >
+                        Create account
+                    </button>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ============================================
+     SIGN UP PAGE
+============================================ -->
+
+<div id="signupPage" class="auth-page">
+
+    <div class="auth-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="auth-brand">
+
+            <div class="auth-logo">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <h1>LegalScan</h1>
+
+            <span>AI Compliance</span>
+
+            <p>
+                Create your inspector account and
+                start performing intelligent inspections.
+            </p>
+
+            <div class="auth-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>Product image analysis</span>
+
+            </div>
+
+            <div class="auth-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>Automated compliance checks</span>
+
+            </div>
+
+            <div class="auth-feature">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>Inspection history</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- SIGNUP FORM -->
+
+        <div class="auth-form-container">
+
+            <div class="auth-form">
+
+                <h2>Create account</h2>
+
+                <p class="auth-subtitle">
+                    Register your LegalScan inspector account
+                </p>
+
+
+                <form onsubmit="signupUser(event)">
+
+
+                    <label>Full Name</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <input
+                            type="text"
+                            id="signupName"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <label>Email Address</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="signupEmail"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <label>Password</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="signupPassword"
+                            placeholder="Create a password"
+                            required
+                        >
+
+                        <i
+                            class="fa-solid fa-eye password-eye"
+                            onclick="togglePassword('signupPassword', this)"
+                        ></i>
+
+                    </div>
+
+
+                    <label>Confirm Password</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="signupConfirmPassword"
+                            placeholder="Confirm your password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <label class="terms-check">
+
+                        <input
+                            type="checkbox"
+                            required
+                        >
+
+                        I agree to the Terms & Conditions
+
+                    </label>
+
+
+                    <button
+                        type="submit"
+                        class="auth-button"
+                    >
+
+                        Create Account
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                    </button>
+
+
+                </form>
+
+
+                <p class="signup-text">
+
+                    Already have an account?
+
+                    <button
+                        class="link-button"
+                        onclick="showLogin()"
+                    >
+                        Sign in
+                    </button>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <div class="logo-text">
+                <h2>LegalScan</h2>
+                <span>AI Compliance</span>
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="navigation">
+
+            <div class="nav-item active" id="nav-dashboard" onclick="showPage('dashboard')">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>Dashboard</span>
+
+            </div>
+
+
+            <div class="nav-item" id="nav-inspection" onclick="showPage('inspection')">
+
+                <i class="fa-solid fa-qrcode"></i>
+
+                <span>New Inspection</span>
+
+            </div>
+
+
+            <div class="nav-item" id="nav-history" onclick="showPage('history')">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                <span>Inspection History</span>
+
+            </div>
+
+
+            <div class="nav-item" id="nav-rules" onclick="showPage('rules')">
+
+    <i class="fa-solid fa-scale-balanced"></i>
+
+    <span>Legal Rules</span>
+
+    </div>
+
+    <div class="nav-item" id="nav-profile" onclick="showPage('profile')">
+
+    <i class="fa-solid fa-user"></i>
+
+    <span>Profile</span>
+
+    </div>
+
+        </nav>
+
+
+        <!-- SIDEBAR BOTTOM -->
+
+        <div class="sidebar-bottom">
+
+            <div class="legal-card">
+
+                <i class="fa-solid fa-book-open"></i>
+
+                <div>
+
+                    <strong>Legal Metrology</strong>
+
+                    <p>Packaged Commodities Rules, 2011</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-card">
+
+                <div class="user-avatar">
+                    A
+                </div>
+
+                <div>
+
+                    <strong>Inspector</strong>
+
+                    <p>Administrator</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================= DASHBOARD PAGE ================= -->
+
+        <section id="dashboard" class="page active-page">
+
+
+            <!-- TOP BAR -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>Compliance Dashboard</h1>
+
+                    <p>
+                        AI-powered packaged commodity inspection
+                    </p>
+
+                </div>
+
+
+                <div class="system-status">
+
+                    <span class="status-dot"></span>
+
+                    System Online
+
+                </div>
+
+            </header>
+
+
+
+            <!-- HERO -->
+
+            <section class="hero">
+
+                <div class="hero-content">
+
+                    <div class="hero-tag">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        LEGAL METROLOGY
+
+                    </div>
+
+
+                    <h2>
+
+                        Inspect products.
+                        <br>
+
+                        <span>Detect compliance issues.</span>
+
+                    </h2>
+
+
+                    <p>
+
+                        Scan packaged products and analyze mandatory
+                        declarations using AI-powered OCR and legal
+                        compliance rules.
+
+                    </p>
+
+
+                    <button class="primary-button"
+                        onclick="showPage('inspection')">
+
+                        <i class="fa-solid fa-qrcode"></i>
+
+                        Start New Inspection
+
+                    </button>
+
+                </div>
+
+
+                <div class="hero-graphic">
+
+                    <div class="package-box">
+
+                        <i class="fa-solid fa-box"></i>
+
+                    </div>
+
+
+                    <div class="floating-check check-one">
+
+                        <i class="fa-solid fa-check"></i>
+
+                        MRP Detected
+
+                    </div>
+
+
+                    <div class="floating-check check-two">
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Net Quantity
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- STATISTICS -->
+
+            <section class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+
+                        <i class="fa-solid fa-box"></i>
+
+                    </div>
+
+                    <div>
+
+                        <p>Total Inspections</p>
+
+                        <h3>128</h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <p>Compliant</p>
+
+                        <h3>87</h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+                    <div>
+
+                        <p>Needs Review</p>
+
+                        <h3>24</h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon red">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                    </div>
+
+                    <div>
+
+                        <p>Potential Issues</p>
+
+                        <h3>17</h3>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- HOW IT WORKS -->
+
+            <section class="workflow-section">
+
+
+                <div class="section-title">
+
+                    <div>
+
+                        <h2>How LegalScan Works</h2>
+
+                        <p>
+                            From product image to compliance assessment
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="workflow-grid">
+
+
+                    <div class="workflow-card">
+
+                        <span class="step-number">01</span>
+
+                        <div class="workflow-icon">
+
+                            <i class="fa-solid fa-upload"></i>
+
+                        </div>
+
+                        <h3>Upload</h3>
+
+                        <p>
+                            Upload a clear image of the product
+                            package or label.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="workflow-card">
+
+                        <span class="step-number">02</span>
+
+                        <div class="workflow-icon">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                        </div>
+
+                        <h3>Scan & Extract</h3>
+
+                        <p>
+                            OCR reads important information
+                            from the product label.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="workflow-card">
+
+                        <span class="step-number">03</span>
+
+                        <div class="workflow-icon">
+
+                            <i class="fa-solid fa-scale-balanced"></i>
+
+                        </div>
+
+                        <h3>Check Rules</h3>
+
+                        <p>
+                            The system compares the information
+                            with applicable rules.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="workflow-card">
+
+                        <span class="step-number">04</span>
+
+                        <div class="workflow-icon">
+
+                            <i class="fa-solid fa-file-circle-check"></i>
+
+                        </div>
+
+                        <h3>Get Report</h3>
+
+                        <p>
+                            Receive an explainable compliance
+                            assessment.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+        <!-- ================= INSPECTION PAGE ================= -->
+
+        <section id="inspection" class="page">
+
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>New Inspection</h1>
+
+                    <p>
+                        Upload a packaged product for analysis
+                    </p>
+
+                </div>
+
+            </header>
+
+
+
+            <div class="inspection-container">
+
+
+                <div class="upload-card">
+
+
+                    <div class="upload-icon-large">
+
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                    </div>
+
+
+                    <h2>Upload Product Image</h2>
+
+
+                    <p>
+
+                        Upload a clear photograph of the package
+                        or product label.
+
+                    </p>
+
+
+                    <label for="productImage" class="upload-button">
+
+                        <i class="fa-solid fa-folder-open"></i>
+
+                        Choose Image
+
+                    </label>
+
+
+                    <input
+                        type="file"
+                        id="productImage"
+                        accept="image/*"
+                        onchange="previewImage(event)"
+                    >
+
+
+                    <p class="file-types">
+
+                        JPG, JPEG or PNG • Maximum 10 MB
+
+                    </p>
+
+
+                    <!-- IMAGE PREVIEW -->
+
+                    <div id="preview-container"
+                        class="preview-container">
+
+                        <img id="preview"
+                            src=""
+                            alt="Product Preview">
+
+                    </div>
+
+
+                    <!-- ANALYZE BUTTON -->
+
+                    <button
+                        id="analyzeButton"
+                        class="primary-button analyze-button"
+                        onclick="startAnalysis()"
+                        disabled>
+
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                        Analyze Product
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- WHAT WE CHECK -->
+
+                <div class="check-card">
+
+                    <h3>What will be checked?</h3>
+
+
+                    <div class="check-list">
+
+                        <div>
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            Product name / description
+
+                        </div>
+
+
+                        <div>
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            Maximum Retail Price (MRP)
+
+                        </div>
+
+
+                        <div>
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            Net quantity
+
+                        </div>
+
+
+                        <div>
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            Manufacturer / packer details
+
+                        </div>
+
+
+                        <div>
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            Date-related declarations
+
+                        </div>
+
+
+                        <div>
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            Other applicable declarations
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================= ANALYSIS PAGE ================= -->
+
+        <section id="analysis" class="page">
+
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>AI Product Analysis</h1>
+
+                    <p>
+                        Processing the uploaded product
+                    </p>
+
+                </div>
+
+            </header>
+
+
+            <div class="analysis-container">
+
+
+                <div class="analysis-image-card">
+
+                    <img id="analysisImage"
+                        src=""
+                        alt="Product">
+
+                </div>
+
+
+                <div class="analysis-progress-card">
+
+                    <div class="ai-icon">
+
+                        <i class="fa-solid fa-brain"></i>
+
+                    </div>
+
+
+                    <h2>Analyzing Product</h2>
+
+                    <p>
+                        Please wait while LegalScan processes
+                        the product information.
+                    </p>
+
+
+                    <div class="analysis-steps">
+
+
+                        <div class="analysis-step">
+
+                            <span id="step1Icon">
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+                            </span>
+
+                            <div>
+
+                                <strong>Image Processing</strong>
+
+                                <p>Preparing product image</p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="analysis-step">
+
+                            <span id="step2Icon">
+
+                                <i class="fa-solid fa-spinner"></i>
+
+                            </span>
+
+                            <div>
+
+                                <strong>OCR Extraction</strong>
+
+                                <p>Reading product label</p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="analysis-step">
+
+                            <span id="step3Icon">
+
+                                <i class="fa-regular fa-circle"></i>
+
+                            </span>
+
+                            <div>
+
+                                <strong>Information Extraction</strong>
+
+                                <p>Identifying declarations</p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="analysis-step">
+
+                            <span id="step4Icon">
+
+                                <i class="fa-regular fa-circle"></i>
+
+                            </span>
+
+                            <div>
+
+                                <strong>Compliance Check</strong>
+
+                                <p>Applying legal rules</p>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================= RESULT PAGE ================= -->
+
+        <section id="result" class="page">
+
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>Compliance Result</h1>
+
+                    <p>
+                        Automated assessment of the product
+                    </p>
+
+                </div>
+
+
+                <button class="secondary-button">
+
+                    <i class="fa-solid fa-download"></i>
+
+                    Generate Report
+
+                </button>
+
+            </header>
+
+
+
+            <div class="result-header">
+
+
+                <div class="result-status">
+
+                    <div class="result-icon">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>OVERALL ASSESSMENT</span>
+
+                        <h2>Needs Review</h2>
+
+                        <p>
+                            Some declarations require manual verification.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="score">
+
+                    <strong>82%</strong>
+
+                    <span>Assessment Score</span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- RESULT CHECKS -->
+
+            <div class="result-grid">
+
+
+                <div class="result-card">
+
+                    <div class="result-card-top">
+
+                        <div>
+
+                            <h3>MRP Declaration</h3>
+
+                            <p>Maximum Retail Price</p>
+
+                        </div>
+
+                        <span class="pass-badge">
+                            PASS
+                        </span>
+
+                    </div>
+
+
+                    <div class="detected-value">
+
+                        <span>Detected Value</span>
+
+                        <strong>₹180</strong>
+
+                    </div>
+
+
+                    <div class="confidence">
+
+                        Confidence
+
+                        <strong>98%</strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="result-card">
+
+                    <div class="result-card-top">
+
+                        <div>
+
+                            <h3>Net Quantity</h3>
+
+                            <p>Declared quantity</p>
+
+                        </div>
+
+                        <span class="pass-badge">
+                            PASS
+                        </span>
+
+                    </div>
+
+
+                    <div class="detected-value">
+
+                        <span>Detected Value</span>
+
+                        <strong>250 g</strong>
+
+                    </div>
+
+
+                    <div class="confidence">
+
+                        Confidence
+
+                        <strong>97%</strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="result-card warning-card">
+
+                    <div class="result-card-top">
+
+                        <div>
+
+                            <h3>Manufacturer Address</h3>
+
+                            <p>Manufacturer details</p>
+
+                        </div>
+
+                        <span class="review-badge">
+                            REVIEW
+                        </span>
+
+                    </div>
+
+
+                    <div class="detected-value">
+
+                        <span>Detected Value</span>
+
+                        <strong>Incomplete</strong>
+
+                    </div>
+
+
+                    <div class="confidence">
+
+                        Confidence
+
+                        <strong>71%</strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="result-card">
+
+                    <div class="result-card-top">
+
+                        <div>
+
+                            <h3>Date Declaration</h3>
+
+                            <p>Manufacturing information</p>
+
+                        </div>
+
+                        <span class="pass-badge">
+                            PASS
+                        </span>
+
+                    </div>
+
+
+                    <div class="detected-value">
+
+                        <span>Detected Value</span>
+
+                        <strong>08/2026</strong>
+
+                    </div>
+
+
+                    <div class="confidence">
+
+                        Confidence
+
+                        <strong>96%</strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- EVIDENCE -->
+
+            <div class="evidence-card">
+
+
+                <div class="evidence-header">
+
+                    <div>
+
+                        <h2>Inspection Evidence</h2>
+
+                        <p>
+                            Information detected from the uploaded label
+                        </p>
+
+                    </div>
+
+
+                    <button class="secondary-button">
+
+                        <i class="fa-solid fa-eye"></i>
+
+                        View Full Image
+
+                    </button>
+
+                </div>
+
+
+                <div class="evidence-content">
+
+
+                    <div class="evidence-image">
+
+                        <img id="resultImage"
+                            src=""
+                            alt="Product evidence">
+
+                    </div>
+
+
+                    <div class="evidence-details">
+
+
+                        <div class="evidence-item">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            <div>
+
+                                <strong>MRP Detected</strong>
+
+                                <p>
+                                    "MRP ₹180"
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="evidence-item">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            <div>
+
+                                <strong>Net Quantity Detected</strong>
+
+                                <p>
+                                    "Net Quantity: 250 g"
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="evidence-item warning">
+
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+
+                            <div>
+
+                                <strong>Address Requires Review</strong>
+
+                                <p>
+                                    Complete address could not be
+                                    confidently identified.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================= HISTORY PAGE ================= -->
+
+        <section id="history" class="page">
+
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>Inspection History</h1>
+
+                    <p>
+                        Previously analyzed products
+                    </p>
+
+                </div>
+
+            </header>
+
+
+            <div class="history-card">
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Product</th>
+
+                            <th>Date</th>
+
+                            <th>Assessment</th>
+
+                            <th>Score</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                <strong>ABC Premium Tea</strong>
+                            </td>
+
+                            <td>05 Sep 2026</td>
+
+                            <td>
+                                <span class="pass-badge">
+                                    PASS
+                                </span>
+                            </td>
+
+                            <td>94%</td>
+
+                            <td>
+                                <button class="view-button">
+                                    View
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>XYZ Cooking Oil</strong>
+                            </td>
+
+                            <td>05 Sep 2026</td>
+
+                            <td>
+                                <span class="review-badge">
+                                    REVIEW
+                                </span>
+                            </td>
+
+                            <td>82%</td>
+
+                            <td>
+                                <button class="view-button">
+                                    View
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>Fresh Soap</strong>
+                            </td>
+
+                            <td>04 Sep 2026</td>
+
+                            <td>
+                                <span class="fail-badge">
+                                    ISSUE
+                                </span>
+                            </td>
+
+                            <td>61%</td>
+
+                            <td>
+                                <button class="view-button">
+                                    View
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+
+        </section>
+        <!-- ================= LEGAL RULES PAGE ================= -->
+
+<section id="rules" class="page">
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>Legal Rules & Compliance</h1>
+
+            <p>
+                Government rules used for packaged commodity inspection
+            </p>
+
+        </div>
+
+        <a
+            href="https://consumeraffairs.gov.in/index.php/pages/legal-metrology-act"
+            target="_blank"
+            class="secondary-button official-link"
+        >
+
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+            Official Government Source
+
+        </a>
+
+    </header>
+
+
+    <!-- SEARCH -->
+
+    <div class="rules-search">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+            type="text"
+            id="ruleSearch"
+            placeholder="Search rules, declarations, MRP, quantity..."
+            onkeyup="searchRules()"
+        >
+
+    </div>
+
+
+    <!-- MAIN LAW CARDS -->
+
+    <div class="law-grid">
+
+
+        <!-- ACT -->
+
+        <div class="law-card">
+
+            <div class="law-icon blue-law">
+
+                <i class="fa-solid fa-scale-balanced"></i>
+
+            </div>
+
+            <div class="law-content">
+
+                <span class="law-label">
+                    CENTRAL ACT
+                </span>
+
+                <h2>
+                    Legal Metrology Act, 2009
+                </h2>
+
+                <p>
+                    The principal legislation governing standards of
+                    weights and measures and related legal metrology
+                    requirements in India.
+                </p>
+
+                <div class="law-meta">
+
+                    <span>
+                        <i class="fa-solid fa-building-columns"></i>
+                        Government of India
+                    </span>
+
+                    <span>
+                        <i class="fa-solid fa-file-lines"></i>
+                        57 Sections
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PACKAGED COMMODITIES -->
+
+        <div class="law-card">
+
+            <div class="law-icon green-law">
+
+                <i class="fa-solid fa-box-open"></i>
+
+            </div>
+
+            <div class="law-content">
+
+                <span class="law-label">
+                    KEY RULES
+                </span>
+
+                <h2>
+                    Legal Metrology (Packaged Commodities) Rules, 2011
+                </h2>
+
+                <p>
+                    Rules governing declarations and requirements
+                    applicable to pre-packaged commodities.
+                </p>
+
+                <div class="law-meta">
+
+                    <span>
+                        <i class="fa-solid fa-calendar"></i>
+                        2011
+                    </span>
+
+                    <span>
+                        <i class="fa-solid fa-rotate"></i>
+                        Amendments included
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MANDATORY DECLARATIONS -->
+
+    <div class="rules-section">
+
+        <div class="rules-section-header">
+
+            <div>
+
+                <span class="section-label">
+                    PACKAGED COMMODITIES
+                </span>
+
+                <h2>
+                    Mandatory Declarations
+                </h2>
+
+                <p>
+                    Information that may be required on packages
+                    under the applicable rules.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="declarations-grid">
+
+
+            <div class="declaration-card rule-item">
+
+                <div class="declaration-number">
+                    01
+                </div>
+
+                <div>
+
+                    <h3>
+                        Name & Address
+                    </h3>
+
+                    <p>
+                        Name and address of the manufacturer,
+                        packer or importer.
+                    </p>
+
+                    <span class="rule-reference">
+                        Rule 6
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="declaration-card rule-item">
+
+                <div class="declaration-number">
+                    02
+                </div>
+
+                <div>
+
+                    <h3>
+                        Country of Origin
+                    </h3>
+
+                    <p>
+                        Country of origin for imported products.
+                    </p>
+
+                    <span class="rule-reference">
+                        Rule 6
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="declaration-card rule-item">
+
+                <div class="declaration-number">
+                    03
+                </div>
+
+                <div>
+
+                    <h3>
+                        Generic Name
+                    </h3>
+
+                    <p>
+                        Common or generic name of the commodity
+                        contained in the package.
+                    </p>
+
+                    <span class="rule-reference">
+                        Rule 6
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="declaration-card rule-item">
+
+                <div class="declaration-number">
+                    04
+                </div>
+
+                <div>
+
+                    <h3>
+                        Net Quantity
+                    </h3>
+
+                    <p>
+                        Net quantity expressed in the standard unit
+                        of weight, measure or number.
+                    </p>
+
+                    <span class="rule-reference">
+                        Rule 6
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="declaration-card rule-item">
+
+                <div class="declaration-number">
+                    05
+                </div>
+
+                <div>
+
+                    <h3>
+                        Date Information
+                    </h3>
+
+                    <p>
+                        Month and year of manufacture and applicable
+                        date declarations.
+                    </p>
+
+                    <span class="rule-reference">
+                        Rule 6
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="declaration-card rule-item">
+
+                <div class="declaration-number">
+                    06
+                </div>
+
+                <div>
+
+                    <h3>
+                        MRP Declaration
+                    </h3>
+
+                    <p>
+                        Retail sale price in the prescribed MRP
+                        format, inclusive of applicable taxes.
+                    </p>
+
+                    <span class="rule-reference">
+                        Rule 6
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="declaration-card rule-item">
+
+                <div class="declaration-number">
+                    07
+                </div>
+
+                <div>
+
+                    <h3>
+                        Consumer Care Details
+                    </h3>
+
+                    <p>
+                        Consumer-care related contact information
+                        as applicable.
+                    </p>
+
+                    <span class="rule-reference">
+                        Rule 6
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="declaration-card rule-item">
+
+                <div class="declaration-number">
+                    08
+                </div>
+
+                <div>
+
+                    <h3>
+                        Unit Sale Price
+                    </h3>
+
+                    <p>
+                        Unit sale price information where
+                        applicable under the rules.
+                    </p>
+
+                    <span class="rule-reference">
+                        Rule 6
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- HOW LEGALSCAN USES RULES -->
+
+    <div class="rule-engine-card">
+
+        <div class="rule-engine-icon">
+
+            <i class="fa-solid fa-robot"></i>
+
+        </div>
+
+        <div>
+
+            <span class="section-label">
+                LEGALSCAN AI
+            </span>
+
+            <h2>
+                How these rules are used
+            </h2>
+
+            <p>
+                LegalScan extracts declarations from the product
+                label using OCR and compares the extracted
+                information against the applicable compliance
+                rules. Each finding can be linked to its relevant
+                rule for explainable inspection results.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- SOURCE -->
+
+    <div class="official-source">
+
+        <div>
+
+            <i class="fa-solid fa-landmark"></i>
+
+            <div>
+
+                <strong>
+                    Official Government Reference
+                </strong>
+
+                <p>
+                    Department of Consumer Affairs,
+                    Government of India
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="https://consumeraffairs.gov.in/index.php/pages/legal-metrology-act"
+            target="_blank"
+        >
+            View official source
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+
+    </div>
+
+</section>
+
+    <!-- ============================================
+     PROFILE PAGE
+============================================ -->
+
+<section id="profile" class="page">
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>My Profile</h1>
+
+            <p>
+                Manage your LegalScan account information
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <div class="profile-container">
+
+        <!-- PROFILE HEADER -->
+
+        <div class="profile-header-card">
+
+            <div class="profile-avatar" id="profileAvatar">
+                A
+            </div>
+
+            <div class="profile-main-info">
+
+                <h2 id="profileName">
+                    User
+                </h2>
+
+                <p id="profileEmail">
+                    user@example.com
+                </p>
+
+                <span class="profile-role">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Inspector
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACCOUNT INFORMATION -->
+
+        <div class="profile-card">
+
+            <div class="profile-card-title">
+
+                <div>
+
+                    <i class="fa-solid fa-id-card"></i>
+
+                    <div>
+
+                        <h2>Account Information</h2>
+
+                        <p>
+                            Your registered account details
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-details">
+
+                <div class="profile-detail">
+
+    <span>Full Name</span>
+
+    <div class="name-edit-row">
+
+        <strong id="profileFullName">
+            -
+        </strong>
+
+        <button
+            class="edit-name-button"
+            onclick="editFullName()"
+        >
+
+            <i class="fa-solid fa-pen"></i>
+
+            Edit
+
+        </button>
+
+    </div>
+
+</div>
+
+
+                <div class="profile-detail">
+
+                    <span>Email Address</span>
+
+                    <strong id="profileEmailDetail">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-detail">
+
+                    <span>Account Type</span>
+
+                    <strong>
+                        Legal Metrology Inspector
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-detail">
+
+                    <span>Account Status</span>
+
+                    <strong class="status-active">
+
+                        <i class="fa-solid fa-circle"></i>
+
+                        Active
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SECURITY -->
+
+        <div class="profile-card">
+
+            <div class="profile-card-title">
+
+                <div>
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <div>
+
+                        <h2>Security</h2>
+
+                        <p>
+                            Account security information
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="security-row">
+
+                <div>
+
+                    <strong>Password</strong>
+
+                    <p>
+                        Your password is protected
+                    </p>
+
+                </div>
+
+                <span class="password-protected">
+
+                    <i class="fa-solid fa-shield-check"></i>
+
+                    Protected
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOGOUT -->
+
+        <button
+            class="logout-button"
+            onclick="logoutUser()"
+        >
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </button>
+
+    </div>
+
+</section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
