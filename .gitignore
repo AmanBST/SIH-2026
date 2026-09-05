@@ -42,4 +42,3 @@ htmlcov/
 *.temp
 
 # Uploads / datasets
-backend/uploads/
